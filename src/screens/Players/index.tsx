@@ -10,6 +10,11 @@ import { FlatList } from 'react-native';
 import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
+import { useRoute } from '@react-navigation/native';
+
+type RouteParams = {
+  group:string;
+}
 
 // Componente Filter envolvido em React.memo para otimização
 const MemoizedFilter = React.memo(Filter);
@@ -18,12 +23,16 @@ export function Players(){
   const [team,setTeam] = useState('Time A')
   const [players,setPlayers] = useState([])
   
+  const route = useRoute()
+  
+  const {group} = route.params as RouteParams
+
   return(
     <Container>
       <Header showBackButton />
 
       <Highlight 
-      title="Nome da Turma"
+      title={group}
       subtitle="Adicione a galera e separe os times" 
       />
 
