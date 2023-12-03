@@ -9,11 +9,28 @@ import { groupCreate } from '@storage/group/groupCreate'
 import { AppError } from '@utils/AppError'
 import { Alert } from 'react-native'
 
-export function Movimentation() {
-  const [movimentation,setMovimentation] = useState('')
+export function NewGroup() {
+  const [group,setGroup] = useState('')
   const navigation = useNavigation()
-  async function handleNewMovimentation(){
-  navigation.navigate('newMovimentation', {movimentation})
+  async function handleNew(){
+    try{
+      if(group.trim().length === 0)
+      {
+        return Alert.alert('Novo Grupo','Informe o nome da Turma')
+      }
+
+      await groupCreate(group)
+      navigation.navigate('players',{group: group})
+
+    }catch(error){
+      if(error instanceof AppError) {
+        Alert.alert('Novo Grupo',error.message)
+      }
+      else {
+        Alert.alert('Novo Grupo','Não Foi possível criar um novo Grupo')
+      }
+      
+    }
   }
   return (
     <Container>
@@ -26,10 +43,15 @@ export function Movimentation() {
         subtitle='Cria a turma para adicionar as pessoas'
         />
 
+        <Input 
+          placeholder='Nome da Turma'
+          onChangeText={setGroup}
+        />
+
         <Button 
         style={{marginTop:20}}
         title='Criar'
-        onPress={handleNewMovimentation}
+        onPress={handleNew}
         />
       </Content>
       

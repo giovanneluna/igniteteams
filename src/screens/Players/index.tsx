@@ -25,7 +25,7 @@ type RouteParams = {
 // Componente Filter envolvido em React.memo para otimização
 const MemoizedFilter = React.memo(Filter);
 
-export function NewMovimentation(){
+export function Players(){
   const [newPlayerName,setNewPlayerName] = useState('')
   const [team,setTeam] = useState('Time A')
   const [players,setPlayers] = useState<PlayerStorageDTO[]>([])
@@ -88,7 +88,7 @@ export function NewMovimentation(){
   async function groupRemove(){
   try {
   await groupRemoveByName(group)
-  navigation.navigate('movimentation')
+  navigation.navigate('groups')
   } catch (error) {
     Alert.alert('Remover Grupo','Não foi possivel remover o grupo')
 }
