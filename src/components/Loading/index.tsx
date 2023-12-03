@@ -1,4 +1,4 @@
-import { LoadIndicator } from "@screens/Groups/styles";
+import { LoadIndicator } from "@screens/Home/styles";
 import { Container } from "./style";
 
 export function Loading() {
